@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\shared\Napoleon.Shared.Core\Napoleon.Shared.Core.csproj" />
+    <ProjectReference Include="..\Napoleon.Fos.Contract\Napoleon.Fos.Contract.csproj" />
+    <ProjectReference Include="..\Napoleon.Fos.Core\Napoleon.Fos.Core.csproj" />
+    <ProjectReference Include="..\Napoleon.Fos.Domain\Napoleon.Fos.Domain.csproj" />
+    <ProjectReference Include="..\Napoleon.Fos.Infrastructure\Napoleon.Fos.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Customers\Auth\Queries\" />
+    <Folder Include="Customers\Normal\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.6.3" />
+  </ItemGroup>
+
+</Project>

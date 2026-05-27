@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="CompareNETObjects" Version="4.83.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.8" />
+  </ItemGroup>
+	
+	<ItemGroup>
+    <ProjectReference Include="..\shared\Napoleon.Shared.Core\Napoleon.Shared.Core.csproj" />
+    <ProjectReference Include="..\shared\Napoleon.Shared.Infrastructure\Napoleon.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Napoleon.Fos.Contract\Napoleon.Fos.Contract.csproj" />
+    <ProjectReference Include="..\Napoleon.Fos.Core\Napoleon.Fos.Core.csproj" />
+  </ItemGroup>
+
+</Project>
