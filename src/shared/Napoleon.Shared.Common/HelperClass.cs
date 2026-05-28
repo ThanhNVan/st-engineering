@@ -33,7 +33,11 @@ public static class HelperClass
 
     public static string ToJson(this object source)
     {
-        return JsonConvert.SerializeObject(source);
+        return JsonConvert.SerializeObject(source, Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                });
     }
 }
 

@@ -29,15 +29,34 @@ public class SeedDataCommandHandler(IAppUnitOfWork appUnitOfWork) : ICommandHand
                 .RuleFor(x => x.ImageUrl, f => f.Image.PicsumUrl());
         var products = productFaker.Generate(5);
 
+        var productDetails = new List<ProductDetail>();
+        var productDetailsFaker = new Faker<ProductDetail>()
+                .RuleFor(x => x.IsDeleted, f => false)
+                .RuleFor(x => x.Varience, f => f.Commerce.ProductName())
+                .RuleFor(x => x.Description, f => f.Commerce.ProductDescription())
+                .RuleFor(x => x.ImageUrl, f => f.Image.PicsumUrl())
+                .RuleFor(x => x.Price, f => f.Random.Int(100, 5000));
+
+        foreach (var product in products)
+        {
+            var details = productDetailsFaker.Generate(5);
+            foreach(var detail in details)
+            {
+                detail.ProductId = product.Id;
+            }
+            productDetails.AddRange(details);
+        }
+
         await appUnitOfWork.ProductRepository.AddRangeAsync(products, cancellationToken);
         await appUnitOfWork.CustomerRepository.AddRangeAsync(customers, cancellationToken);
+        await appUnitOfWork.ProductDetailtRepository.AddRangeAsync(productDetails, cancellationToken);
         var isSucceeded = await appUnitOfWork.SaveChangesAsync(cancellationToken) > 0;
 
         if (!isSucceeded)
             return "Seed data unsucceed.";
 
-        var emailsString = string.Join(", ", customers.Select(x => x.Email));
+        var emailsString = string.Join(", ", customers.Select(x => string.Join(x.Email, " with password: 12345678")));
 
-        return emailsString += "with password: 12345678";
+        return emailsString;
     }
 }

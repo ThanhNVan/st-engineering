@@ -50,7 +50,7 @@ namespace Napoleon.Fos.Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("AuthenticationTokens");
+                    b.ToTable("AuthenticationTokens", (string)null);
                 });
 
             modelBuilder.Entity("Napoleon.Fos.Domain.Entities.Customer", b =>
@@ -89,7 +89,7 @@ namespace Napoleon.Fos.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Napoleon.Fos.Domain.Entities.Product", b =>
@@ -123,7 +123,7 @@ namespace Napoleon.Fos.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Napoleon.Fos.Domain.Entities.ProductDetail", b =>
@@ -167,7 +167,7 @@ namespace Napoleon.Fos.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductDetails");
+                    b.ToTable("ProductDetails", (string)null);
                 });
 
             modelBuilder.Entity("Napoleon.Shared.Domain.Entity.AuditTrail", b =>
@@ -209,7 +209,7 @@ namespace Napoleon.Fos.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuditTrails");
+                    b.ToTable("AuditTrails", (string)null);
                 });
 
             modelBuilder.Entity("Napoleon.Fos.Domain.Entities.AuthenticationToken", b =>

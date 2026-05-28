@@ -1,6 +1,7 @@
 ﻿using Napoleon.Shared.Domain.AuditTrails;
 using Napoleon.Shared.Domain.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Napoleon.Fos.Domain.Entities;
 
@@ -12,6 +13,7 @@ public class Product : BaseEntity, IDeletingAuditTrail, IModifyingAuditTrail, IA
     
     public string ImageUrl { get; set; }
 
-    [InverseProperty("Product")]
+    //[InverseProperty("Product")]
+    [JsonIgnore]
     public virtual ICollection<ProductDetail>? ProductDetails { get; set; }
 }

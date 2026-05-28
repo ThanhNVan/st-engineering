@@ -1,4 +1,3 @@
-using Microsoft.OpenApi;
 using Napoleon.Fos.Application.Extensions;
 using Napoleon.Fos.Infrastructure.Extensions;
 using Napoleon.Fos.Presentation.WebApi.Definitions;
