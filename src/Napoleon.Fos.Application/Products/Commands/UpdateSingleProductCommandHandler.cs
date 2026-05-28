@@ -1,4 +1,5 @@
-﻿using Napoleon.Fos.Application.Products.Extensions;
+﻿using Microsoft.EntityFrameworkCore;
+using Napoleon.Fos.Application.Products.Extensions;
 using Napoleon.Fos.Contract.Products;
 using Napoleon.Fos.Core.UnitOfWork;
 using Napoleon.Shared.Core.Requests.Commands;
@@ -11,17 +12,18 @@ public class UpdateSingleProductCommandHandler(IAppUnitOfWork appUnitOfWork) : I
 {
     public async Task<ProductDto> Handle(UpdateSingleProductCommand command, CancellationToken cancellationToken)
     {
-        if (command.ProductDto.Id is null)
-            throw new ArgumentNullException("Id cannot be null");
+        ArgumentNullException.ThrowIfNull(command.ProductDto.Id);
+        var query = appUnitOfWork.ProductRepository.GetQueryable()
+                                   .Include(x => x.ProductDetails)
+                               .Where(x => x.Id.Equals(command.ProductDto.Id));
 
-        var dbEntity = await appUnitOfWork.ProductRepository.GetSingleByIdAsync(command.ProductDto.Id.Value, cancellationToken);
+        var dbEntity = await appUnitOfWork.ProductRepository.GetSingleAsync(query, cancellationToken);
 
-        if (dbEntity is null)
-            throw new ArgumentNullException("Not found entity");
-
+        ArgumentNullException.ThrowIfNull(dbEntity);
         var entity = command.ProductDto.ToEntity();
 
-        await appUnitOfWork.ProductRepository.UpdateAndSaveAsync(entity, cancellationToken);
+        appUnitOfWork.ProductRepository.Update(entity);
+        await appUnitOfWork.ProductDetailtRepository.UpdateRangeAndSaveAsync(entity.ProductDetails.ToList(), cancellationToken);
 
         return command.ProductDto;
     }

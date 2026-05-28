@@ -1,6 +1,7 @@
 ﻿using ControllerIntegrationTest.Helper;
 using Napoleon.Fos.Application.Products.Extensions;
 using Napoleon.Fos.Contract.Customers;
+using Napoleon.Fos.Contract.ProductDetails;
 using Napoleon.Fos.Contract.Products;
 using Napoleon.Shared.Contract.ApiResponse;
 using Newtonsoft.Json;
@@ -61,7 +62,7 @@ public class ProductIntegrationTest(CustomWebApplicationFactory<Program> factory
     {
         // Arrange
         var token = await SetUpTokenAsync();
-        var productDto = new ProductDto(null, "string 11", "decript 1", "image URL 1");
+        var productDto = new ProductDto(null, "string 11", "decript 1", "image URL 1", [new ProductDetailDto(null, "1", "2", "3", 5)]);
 
         // Act
         var httpClient = _appFactory.CreateClient();

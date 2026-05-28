@@ -30,5 +30,25 @@ public class ProductDtoValidator : AbstractValidator<ProductDto>
             .WithMessage("Name is longer than 2 characters")
             .MaximumLength(128)
             .WithMessage("Name is less than 128 characters");
+
+        RuleFor(x => x.ProductDetails)
+            .NotEmpty()
+            .WithMessage("Mus have Product Detail");
+        
+        RuleFor(x => x.ProductDetails.Select(x => x.Price <= 0))
+            .NotEmpty()
+            .WithMessage("Value must be non-negative");
+
+        RuleFor(x => x.ProductDetails.Select(x => x.Varience.Length <= 2 && x.Varience.Length > 128))
+            .NotEmpty()
+            .WithMessage("Name is longer than 2 characters and  less than 128 characters");
+        
+        RuleFor(x => x.ProductDetails.Select(x => x.ImageUrl.Length <= 0))
+            .NotEmpty()
+            .WithMessage("ImageUrl is Required");
+        
+        RuleFor(x => x.ProductDetails.Select(x => x.Description.Length <= 0))
+            .NotEmpty()
+            .WithMessage("Description is Required");
     }
 }

@@ -12,7 +12,7 @@ public interface IBaseRepository<TEntity>
     ValueTask<IList<TEntity>?> GetManyByIdsAsync(IList<Guid> ids, CancellationToken cancellationToken = default);
 
     ValueTask<TEntity?> GetSingleAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
-
+    ValueTask<TEntity?> GetSingleAsync(IQueryable<TEntity> expression, CancellationToken cancellationToken = default);
     ValueTask<TEntity?> GetSingleByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     ValueTask<TType?> GetSingleTypeAsync<TType>(IQueryable<TType> queryable, CancellationToken cancellationToken = default);

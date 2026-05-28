@@ -3,8 +3,8 @@ using Napoleon.Shared.Common;
 using Napoleon.Shared.Common.CustomException;
 using Napoleon.Shared.Core.Repositories;
 using Napoleon.Shared.Domain.Entity;
-using System.Linq.Expressions;
 using Napoleon.Shared.Infrastructure.PersistenceDbContext;
+using System.Linq.Expressions;
 
 namespace Napoleon.Shared.Infrastructure.Repositories;
 
@@ -38,6 +38,14 @@ where TEntity : BaseEntity
         var result = await GetQueryable()
                                 .Where(expression)
                                 .FirstOrDefaultAsync(cancellationToken);
+
+        return result;
+    }
+
+    public async ValueTask<TEntity?> GetSingleAsync(IQueryable<TEntity> expression,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await expression.FirstOrDefaultAsync(cancellationToken);
 
         return result;
     }

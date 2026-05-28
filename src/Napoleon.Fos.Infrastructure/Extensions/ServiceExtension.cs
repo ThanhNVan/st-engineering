@@ -47,6 +47,7 @@ public static class ServiceExtension
         service.AddScoped<ICustomerRepository, CustomerRepository>();
         service.AddScoped<IAuthenticationTokenRepository, AuthenticationTokenRepository>();
         service.AddScoped<IProductRepository, ProductRepository>();
+        service.AddScoped<IProductDetailtRepository, ProductDetailRepository>();
         //service.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         service.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
     }
