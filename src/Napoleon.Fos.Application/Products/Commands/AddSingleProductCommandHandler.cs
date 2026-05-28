@@ -16,6 +16,7 @@ public class AddSingleProductCommandHandler(IAppUnitOfWork appUnitOfWork) : ICom
 
         var dbEntity = await appUnitOfWork.ProductRepository.AddAsync(entity, cancellationToken);
         var dbDetails=  await appUnitOfWork.ProductDetailtRepository.AddRangeWithResultAsync(details, cancellationToken);
+        
         await appUnitOfWork.SaveChangesAsync(cancellationToken);
         var result = new ProductDto(dbEntity.Id, dbEntity.Name, dbEntity.Description, dbEntity.ImageUrl, dbDetails.ToList().ToListDto());
         return result;

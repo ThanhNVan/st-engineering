@@ -2,4 +2,9 @@
 
 namespace Napoleon.Fos.Contract.ProductDetails;
 
-public record ProductDetailDto(Guid? Id, string Varience, string Description, string ImageUrl, int Price) : BaseDto(Id);
+public record ProductDetailDto(Guid? Id, 
+    string Varience, 
+    string Description, 
+    string ImageUrl, 
+    int Price,
+    Guid ProductId) : BaseDto(Id);
