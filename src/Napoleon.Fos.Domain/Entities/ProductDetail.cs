@@ -1,8 +1,8 @@
 ﻿using Napoleon.Shared.Domain.AuditTrails;
 using Napoleon.Shared.Domain.Entity;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Napoleon.Fos.Domain.Entities;
 
@@ -20,9 +20,9 @@ public class ProductDetail : BaseEntity, IDeletingAuditTrail, IModifyingAuditTra
     [Range(0, int.MaxValue, ErrorMessage = "Value must be non-negative")]
     public int Price { get; set; }
 
-    //[InverseProperty("ProductDetails")]
+    [InverseProperty("ProductDetails")]
     [ForeignKey(nameof(ProductId))]
-    [JsonIgnore]
+    //[JsonIgnore]
     public virtual Product? Product { get; set; }
 }
 

@@ -16,11 +16,13 @@ public static class ProductMappingExtesion
                 Description = productDto.Description,
                 ImageUrl = productDto.ImageUrl,
                 Name = productDto.Name,
+                ProductDetails = productDto.ProductDetails.ToList().ToListEntity()
             } : new Product
             {
                 Description = productDto.Description,
                 ImageUrl = productDto.ImageUrl,
                 Name = productDto.Name,
+                ProductDetails = productDto.ProductDetails.ToList().ToListEntity()
             }
         ;
     }

@@ -23,7 +23,7 @@ public class UpdateSingleProductCommandHandler(IAppUnitOfWork appUnitOfWork) : I
         var entity = command.ProductDto.ToEntity();
 
         appUnitOfWork.ProductRepository.Update(entity);
-        await appUnitOfWork.ProductDetailtRepository.UpdateRangeAndSaveAsync(entity.ProductDetails.ToList(), cancellationToken);
+        await appUnitOfWork.ProductDetailtRepository.UpdateRangeAndSaveAsync([.. entity.ProductDetails], cancellationToken);
 
         return command.ProductDto;
     }
