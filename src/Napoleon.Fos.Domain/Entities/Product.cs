@@ -1,5 +1,6 @@
 ﻿using Napoleon.Shared.Domain.AuditTrails;
 using Napoleon.Shared.Domain.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Napoleon.Fos.Domain.Entities;
 
@@ -10,4 +11,7 @@ public class Product : BaseEntity, IDeletingAuditTrail, IModifyingAuditTrail, IA
     public string Description { get; set; }
     
     public string ImageUrl { get; set; }
+
+    [InverseProperty("Product")]
+    public virtual ICollection<ProductDetail>? ProductDetails { get; set; }
 }

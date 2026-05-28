@@ -38,6 +38,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> contextOptions) : BaseD
 
     public DbSet<Product> Products { get; set; }
 
+    public DbSet<ProductDetail> ProductDetails { get; set; }
+
     #endregion
 
     #region [ Audit Trails ]
