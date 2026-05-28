@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Napoleon.Fos.Application.ProductDetails.Commands;
+using Napoleon.Fos.Application.ProductDetails.Queries;
 using Napoleon.Fos.Contract.ProductDetails;
 using Napoleon.Shared.Contract.ApiResponse;
 
@@ -16,6 +17,36 @@ public class ProductDetailController(ISender sender) : ControllerBase
     public async ValueTask<IActionResult> AddSingleAsync([FromBody] ProductDetailDto productDto, CancellationToken cancellationToken = default)
     {
         var data = await sender.Send(new AddSingleProductDetailCommand(productDto), cancellationToken);
+
+        var result = data.GetApiResult();
+
+        return Ok(result);
+    }
+    
+    [HttpPut("")]
+    public async ValueTask<IActionResult> UpdateSingleAsync([FromBody] ProductDetailDto productDto, CancellationToken cancellationToken = default)
+    {
+        var data = await sender.Send(new UpdateSingleProductDetailCommand(productDto), cancellationToken);
+
+        var result = data.GetApiResult();
+
+        return Ok(result);
+    }
+    
+    [HttpDelete("")]
+    public async ValueTask<IActionResult> DeleteSingleAsync([FromBody] Guid Id, CancellationToken cancellationToken = default)
+    {
+        var data = await sender.Send(new DeleteSingleProductDetailCommand(Id), cancellationToken);
+
+        var result = data.GetApiResult();
+
+        return Ok(result);
+    }
+    
+    [HttpGet("")]
+    public async ValueTask<IActionResult> GetManyByProductIdAsync([FromQuery] Guid ProductId, CancellationToken cancellationToken = default)
+    {
+        var data = await sender.Send(new GetManyByProductIdQuery(ProductId), cancellationToken);
 
         var result = data.GetApiResult();
 
