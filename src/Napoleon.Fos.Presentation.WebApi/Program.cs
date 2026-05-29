@@ -28,6 +28,7 @@ builder.Services.AddAuthenticationPolicies(builder.Configuration);
 builder.Services.AddSwaggerDefinition();
 
 var app = builder.Build();
+app.UseCors("default");
 
 // Configure the HTTP request pipeline.
 

@@ -36,14 +36,14 @@ public static class ProductMappingExtesion
                 Id = productDetailDto.Id.Value,
                 Description = productDetailDto.Description,
                 ImageUrl = productDetailDto.ImageUrl,
-                Varience = productDetailDto.Varience,
+                Varience = productDetailDto.Variance,
                 Price = productDetailDto.Price,
                 ProductId = productDetailDto.ProductId
             } : new ProductDetail
             {
                 Description = productDetailDto.Description,
                 ImageUrl = productDetailDto.ImageUrl,
-                Varience = productDetailDto.Varience,
+                Varience = productDetailDto.Variance,
                 Price = productDetailDto.Price,
                 ProductId = productDetailDto.ProductId
             }

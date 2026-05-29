@@ -3,7 +3,7 @@
 namespace Napoleon.Fos.Contract.ProductDetails;
 
 public record ProductDetailDto(Guid? Id, 
-    string Varience, 
+    string Variance, 
     string Description, 
     string ImageUrl, 
     int Price,

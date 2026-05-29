@@ -39,7 +39,7 @@ public class ProductDtoValidator : AbstractValidator<ProductDto>
             .NotEmpty()
             .WithMessage("Value must be non-negative");
 
-        RuleFor(x => x.ProductDetails.Select(x => x.Varience.Length <= 2 && x.Varience.Length > 128))
+        RuleFor(x => x.ProductDetails.Select(x => x.Variance.Length <= 2 && x.Variance.Length > 128))
             .NotEmpty()
             .WithMessage("Name is longer than 2 characters and  less than 128 characters");
         
