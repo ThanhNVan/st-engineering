@@ -20,5 +20,8 @@ public class Customer : BaseEntity, IDeletingAuditTrail, IModifyingAuditTrail, I
     #region [ Properties - Virtual ]
     [InverseProperty("Customer")]
     public virtual ICollection<AuthenticationToken>? AuthenticationTokens { get; set; }
+    
+    [InverseProperty("Customer")]
+    public virtual ICollection<Cart>? Carts { get; set; }
     #endregion
 }

@@ -9,7 +9,9 @@ public interface IAppUnitOfWork
     IAuthenticationTokenRepository AuthenticationTokenRepository { get; }
 
     IProductRepository ProductRepository { get; }
+
     IProductDetailtRepository ProductDetailtRepository { get; }
+    ICartRepository CartRepository { get; }
 
     ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

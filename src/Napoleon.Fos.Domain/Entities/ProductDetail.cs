@@ -1,6 +1,5 @@
 ﻿using Napoleon.Shared.Domain.AuditTrails;
 using Napoleon.Shared.Domain.Entity;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,5 +27,8 @@ public class ProductDetail : BaseEntity, IDeletingAuditTrail, IModifyingAuditTra
     [ForeignKey(nameof(ProductId))]
     //[JsonIgnore]
     public virtual Product? Product { get; set; }
+
+    [InverseProperty("ProductDetail")]
+    public virtual ICollection<Cart>? Carts { get; set; }
 }
 

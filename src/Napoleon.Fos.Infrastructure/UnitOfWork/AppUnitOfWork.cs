@@ -8,13 +8,15 @@ public class AppUnitOfWork(AppDbContext appDbContext,
     ICustomerRepository customerRepository, 
     IAuthenticationTokenRepository authenticationTokenRepository, 
     IProductRepository productRepository,
-    IProductDetailtRepository productDetailtRepository) 
+    IProductDetailtRepository productDetailtRepository,
+    ICartRepository cartRepository) 
     : IAppUnitOfWork
 {
     public ICustomerRepository CustomerRepository { get; } = customerRepository;
     public IAuthenticationTokenRepository AuthenticationTokenRepository { get; } = authenticationTokenRepository;
     public IProductRepository ProductRepository { get; } = productRepository;
     public IProductDetailtRepository ProductDetailtRepository { get; } = productDetailtRepository;
+    public ICartRepository CartRepository { get; } = cartRepository;
 
     public async ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

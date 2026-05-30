@@ -40,6 +40,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> contextOptions) : BaseD
 
     public DbSet<ProductDetail> ProductDetails { get; set; }
 
+    public DbSet<Cart> Carts { get; set; }
+
     #endregion
 
     #region [ Audit Trails ]
