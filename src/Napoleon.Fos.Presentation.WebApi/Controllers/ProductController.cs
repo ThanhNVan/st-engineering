@@ -8,7 +8,7 @@ using Napoleon.Shared.Contract.ApiResponse;
 
 namespace Napoleon.Fos.Presentation.WebApi.Controllers;
 
-[AllowAnonymous]
+//[AllowAnonymous]
 [ApiController]
 [Route("api/v1/products")]
 public class ProductController(ISender sender) : ControllerBase

@@ -38,14 +38,16 @@ public static class ProductMappingExtesion
                 ImageUrl = productDetailDto.ImageUrl,
                 Varience = productDetailDto.Variance,
                 Price = productDetailDto.Price,
-                ProductId = productDetailDto.ProductId
+                ProductId = productDetailDto.ProductId,
+                Quantity = productDetailDto.Quantity
             } : new ProductDetail
             {
                 Description = productDetailDto.Description,
                 ImageUrl = productDetailDto.ImageUrl,
                 Varience = productDetailDto.Variance,
                 Price = productDetailDto.Price,
-                ProductId = productDetailDto.ProductId
+                ProductId = productDetailDto.ProductId,
+                Quantity = productDetailDto.Quantity
             }
         ;
     }
@@ -69,7 +71,7 @@ public static class ProductMappingExtesion
 
     public static ProductDetailDto ToDto(this ProductDetail productDetail)
     {
-        return new ProductDetailDto(productDetail.Id, productDetail.Varience, productDetail.Description, productDetail.ImageUrl, productDetail.Price, productDetail.ProductId);
+        return new ProductDetailDto(productDetail.Id, productDetail.Varience, productDetail.Description, productDetail.ImageUrl, productDetail.Price, productDetail.ProductId, productDetail.Quantity);
     }
     
     public static IList<ProductDetailDto> ToListDto(this IList<ProductDetail> productDetailList)
@@ -78,7 +80,7 @@ public static class ProductMappingExtesion
 
         foreach ( var productDetail in productDetailList)
         {
-            result.Add(new ProductDetailDto(productDetail.Id, productDetail.Varience, productDetail.Description, productDetail.ImageUrl, productDetail.Price, productDetail.ProductId));
+            result.Add(new ProductDetailDto(productDetail.Id, productDetail.Varience, productDetail.Description, productDetail.ImageUrl, productDetail.Price, productDetail.ProductId, productDetail.Quantity));
 
         }
 

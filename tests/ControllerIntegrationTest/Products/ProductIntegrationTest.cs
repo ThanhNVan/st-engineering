@@ -63,7 +63,7 @@ public class ProductIntegrationTest(CustomWebApplicationFactory<Program> factory
         // Arrange
         var token = await SetUpTokenAsync();
         var productId = Ulid.NewUlid().ToGuid();
-        var productDto = new ProductDto(productId, "string 11", "decript 1", "image URL 1", [new ProductDetailDto(null, "1", "2", "3", 5, productId)]);
+        var productDto = new ProductDto(productId, "string 11", "decript 1", "image URL 1", [new ProductDetailDto(null, "1", "2", "3", 5, productId, 5)]);
 
         // Act
         var httpClient = _appFactory.CreateClient();

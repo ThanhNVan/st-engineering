@@ -73,7 +73,7 @@ public class ProductUnitTest
         // Act
         var handler = new UpdateSingleProductCommandHandler(_appUnitOfWork.Object);
         var productId = Ulid.NewUlid().ToGuid();
-        var actual = async () => await handler.Handle(new UpdateSingleProductCommand(new ProductDto(productId, "name", "description", "imageURL", [new ProductDetailDto(null, "1", "2", "3", 5, productId)])), CancellationToken.None);
+        var actual = async () => await handler.Handle(new UpdateSingleProductCommand(new ProductDto(productId, "name", "description", "imageURL", [new ProductDetailDto(null, "1", "2", "3", 5, productId, 5)])), CancellationToken.None);
         // Assert
 
         await Assert.ThrowsAsync<ArgumentNullException>(actual);
@@ -89,7 +89,7 @@ public class ProductUnitTest
         // Act
         var handler = new UpdateSingleProductCommandHandler(_appUnitOfWork.Object);
         var productId = Ulid.NewUlid().ToGuid();
-        var actual = async () => await handler.Handle(new UpdateSingleProductCommand(new ProductDto(productId, "name", "description", "imageURL", [new ProductDetailDto(Ulid.NewUlid().ToGuid(), "1", "2", "3", 5, productId)])), CancellationToken.None);
+        var actual = async () => await handler.Handle(new UpdateSingleProductCommand(new ProductDto(productId, "name", "description", "imageURL", [new ProductDetailDto(Ulid.NewUlid().ToGuid(), "1", "2", "3", 5, productId, 5)])), CancellationToken.None);
         // Assert
 
         await Assert.ThrowsAsync<ArgumentNullException>(actual);

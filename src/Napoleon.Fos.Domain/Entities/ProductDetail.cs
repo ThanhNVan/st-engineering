@@ -15,6 +15,10 @@ public class ProductDetail : BaseEntity, IDeletingAuditTrail, IModifyingAuditTra
 
     public string ImageUrl { get; set; }
 
+
+    [Range(0, int.MaxValue, ErrorMessage = "Quantity must be non-negative")]
+    public int Quantity { get; set; }
+
     public Guid ProductId { get; set; }
 
     [Range(0, int.MaxValue, ErrorMessage = "Value must be non-negative")]
