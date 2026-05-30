@@ -48,9 +48,24 @@ public class SeedDataCommandHandler(IAppUnitOfWork appUnitOfWork) : ICommandHand
             productDetails.AddRange(details);
         }
 
+        var cartFaker = new Faker<Cart>()
+            .RuleFor(x => x.IsDeleted, f => false)
+            .RuleFor(x => x.Quantity, 1);
+
+        var carts = cartFaker.Generate(25);
+        foreach(var (customer, index) in customers.Select((value, i) => (value, i)))
+        {
+            for (int i = index * 5; i < (index * 5) + 5; i++)
+            {
+                carts[i].ProductDetailId = productDetails[i].Id;
+                carts[i].CustomerId = customer.Id;
+            }
+        }
+
         await appUnitOfWork.ProductRepository.AddRangeAsync(products, cancellationToken);
         await appUnitOfWork.CustomerRepository.AddRangeAsync(customers, cancellationToken);
         await appUnitOfWork.ProductDetailtRepository.AddRangeAsync(productDetails, cancellationToken);
+        await appUnitOfWork.CartRepository.AddRangeAsync(carts, cancellationToken);
         var isSucceeded = await appUnitOfWork.SaveChangesAsync(cancellationToken) > 0;
 
         if (!isSucceeded)

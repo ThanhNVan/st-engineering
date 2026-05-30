@@ -13,7 +13,7 @@ public class SeedDataController(ISender sender, ICapPublisher _cap) : Controller
 {
 
     [HttpPost("")]
-    //[AllowAnonymous]
+    [AllowAnonymous]
     [SwaggerOperation("Seed data, return a list of email for you to login")]
     public async ValueTask<IActionResult> AddSingleAsync(CancellationToken cancellationToken = default)
     {
