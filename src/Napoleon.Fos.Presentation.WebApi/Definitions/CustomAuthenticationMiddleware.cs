@@ -17,7 +17,8 @@ public class CustomAuthenticationMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         var endpoint = context.GetEndpoint();
-        if (endpoint?.Metadata?.GetMetadata<AllowAnonymousAttribute>() != null)
+        if ((endpoint?.Metadata?.GetMetadata<AllowAnonymousAttribute>() != null) ||
+            context.Request.Path.Value.Contains("cap", StringComparison.InvariantCultureIgnoreCase))
         {
             // This endpoint allows anonymous access, skip authentication
             await _next(context);
@@ -30,7 +31,7 @@ public class CustomAuthenticationMiddleware
         var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
         if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
             throw new UnauthorizedException("failed to validate");
-            
+
         var token = authHeader.Substring("Bearer ".Length).Trim();
         var handler = new JwtSecurityTokenHandler();
         var jwtSecurityToken = handler.ReadJwtToken(token);
@@ -40,9 +41,8 @@ public class CustomAuthenticationMiddleware
         if (!isValidTokenId || !isValidCustomerId)
             throw new UnauthorizedException("failed to validate");
 
-
         // Validate the token (you can use JWT or any other token mechanism)
-        var isTokenValid = await authenticationTokenRepository.IsAnyAsync(x => x.Id == tokenId 
+        var isTokenValid = await authenticationTokenRepository.IsAnyAsync(x => x.Id == tokenId
                                                             && x.ValidTill > DateTimeOffset.Now
                                                             && x.CustomerId == customerId);
 

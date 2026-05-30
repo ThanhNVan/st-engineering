@@ -23,7 +23,7 @@ public class SeedDataController(ISender sender, ICapPublisher _cap) : Controller
     }
 
     [AllowAnonymous]
-    [HttpPost("cap")]
+    [HttpPost("test-cap")]
     public async ValueTask<IActionResult> TestCapAsync(CancellationToken cancellationToken = default)
     {
         await _cap.PublishAsync("order.created", new

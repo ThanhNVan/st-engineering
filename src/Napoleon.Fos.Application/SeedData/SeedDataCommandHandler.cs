@@ -35,7 +35,8 @@ public class SeedDataCommandHandler(IAppUnitOfWork appUnitOfWork) : ICommandHand
                 .RuleFor(x => x.Varience, f => f.Commerce.ProductName())
                 .RuleFor(x => x.Description, f => f.Commerce.ProductDescription())
                 .RuleFor(x => x.ImageUrl, f => f.Image.PicsumUrl())
-                .RuleFor(x => x.Price, f => f.Random.Int(100, 5000));
+                .RuleFor(x => x.Price, f => f.Random.Int(100, 5000))
+                .RuleFor(x => x.Quantity, f => f.Random.Int(0, 10));
 
         foreach (var product in products)
         {

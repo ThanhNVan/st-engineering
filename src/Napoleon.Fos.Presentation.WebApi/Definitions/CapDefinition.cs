@@ -1,4 +1,6 @@
 ﻿namespace Napoleon.Fos.Presentation.WebApi.Definitions;
+
+using Microsoft.Extensions.Options;
 using Savorboard.CAP.InMemoryMessageQueue;
 
 public static class CapDefinition
@@ -22,6 +24,7 @@ public static class CapDefinition
             cap.UseDashboard(opt =>
             {
                 opt.StatsPollingInterval = 5_000;
+                opt.AllowAnonymousExplicit = true;
             });
 
             // Retry config
