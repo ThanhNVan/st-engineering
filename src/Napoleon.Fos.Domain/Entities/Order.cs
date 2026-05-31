@@ -13,7 +13,6 @@ public class Order : BaseEntity, IDeletingAuditTrail, IModifyingAuditTrail, IAdd
 
     public OrderPaymentStatus OrderPaymentStatus { get; set; }
 
-
     #region [ Properties - Virtual ]
     [InverseProperty("Order")]
     public virtual ICollection<OrderDetail>? OrderDetails { get; set; }

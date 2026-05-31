@@ -14,9 +14,9 @@ public class GetAllProductQueryHandler(IAppUnitOfWork appUnitOfWork) : IQueryHan
     public async Task<IList<ProductDto>> Handle(GetAllProductQuery queryRequest, CancellationToken cancellationToken)
     {
         var query = queryRequest.Name.IsNullOrEmpty()
-                        ? appUnitOfWork.ProductRepository.GetQueryable().Include(x => x.ProductDetails) 
+                        ? appUnitOfWork.ProductRepository.GetQueryable().Include(x => x.ProductDetails.Where(x => x.Quantity > 0))
                         // note: must use ToLower, don't use stringComparison
-                        : appUnitOfWork.ProductRepository.GetQueryable().Include(x => x.ProductDetails)
+                        : appUnitOfWork.ProductRepository.GetQueryable().Include(x => x.ProductDetails.Where(x => x.Quantity > 0))
                                 .Where(x => x.Name.Trim().ToLower().Contains(queryRequest.Name.ToLower()));
 
         var queryDto = query.Select(x => new ProductDto(x.Id, x.Name, x.Description, x.ImageUrl, x.ProductDetails.ToList().ToListDto()));
