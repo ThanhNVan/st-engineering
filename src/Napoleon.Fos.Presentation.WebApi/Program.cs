@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoValidation();
 builder.Services.AddExceptionHandlerDefinition();
 builder.Services.AddCorsPolicies();
+builder.Services.AddMemoryCache();
 builder.Services.AddControllers(options =>
 {
     options.AddApiFormatter();
