@@ -1,6 +1,7 @@
 ﻿using Napoleon.Fos.Contract.ProductDetails;
 using Napoleon.Fos.Contract.Products;
 using Napoleon.Fos.Domain.Entities;
+using System;
 
 namespace Napoleon.Fos.Application.Products.Extensions;
 
@@ -16,13 +17,13 @@ public static class ProductMappingExtesion
                 Description = productDto.Description,
                 ImageUrl = productDto.ImageUrl,
                 Name = productDto.Name,
-                ProductDetails = productDto.ProductDetails.ToList().ToListEntity()
+                ProductDetails = productDto.ProductDetails?.ToList().ToListEntity()
             } : new Product
             {
                 Description = productDto.Description,
                 ImageUrl = productDto.ImageUrl,
                 Name = productDto.Name,
-                ProductDetails = productDto.ProductDetails.ToList().ToListEntity()
+                ProductDetails = productDto.ProductDetails?.ToList().ToListEntity()
             }
         ;
     }
@@ -38,7 +39,7 @@ public static class ProductMappingExtesion
                 ImageUrl = productDetailDto.ImageUrl,
                 Varience = productDetailDto.Variance,
                 Price = productDetailDto.Price,
-                ProductId = productDetailDto.ProductId,
+                ProductId = productDetailDto.ProductId ?? Ulid.NewUlid().ToGuid(),
                 Quantity = productDetailDto.Quantity
             } : new ProductDetail
             {
@@ -46,7 +47,7 @@ public static class ProductMappingExtesion
                 ImageUrl = productDetailDto.ImageUrl,
                 Varience = productDetailDto.Variance,
                 Price = productDetailDto.Price,
-                ProductId = productDetailDto.ProductId,
+                ProductId = productDetailDto.ProductId ?? Ulid.NewUlid().ToGuid(),
                 Quantity = productDetailDto.Quantity
             }
         ;

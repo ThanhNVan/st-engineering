@@ -52,4 +52,14 @@ public class ProductController(ISender sender) : ControllerBase
 
         return Ok(result);
     }
+    
+    [HttpGet("{productId:guid}")]
+    public async ValueTask<IActionResult> GetSingleAsync([FromRoute] Guid productId, CancellationToken cancellationToken = default)
+    {
+        var data = await sender.Send(new GetSingleProductQuery(productId), cancellationToken);
+
+        var result = data.GetApiResult();
+
+        return Ok(result);
+    }
 }

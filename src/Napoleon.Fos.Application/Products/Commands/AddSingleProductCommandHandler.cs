@@ -12,7 +12,13 @@ public class AddSingleProductCommandHandler(IAppUnitOfWork appUnitOfWork) : ICom
     public async Task<ProductDto> Handle(AddSingleProductCommand command, CancellationToken cancellationToken)
     {
         var entity = command.ProductDto.ToEntity();
+        entity.Id = Ulid.NewUlid().ToGuid();
         var details = command.ProductDto.ProductDetails.ToList().ToListEntity();
+        foreach (var detail in details)
+        { 
+            detail.ProductId = entity.Id; 
+            detail.Id = Ulid.NewUlid().ToGuid();
+        }
 
         var dbEntity = await appUnitOfWork.ProductRepository.AddAsync(entity, cancellationToken);
         var dbDetails=  await appUnitOfWork.ProductDetailtRepository.AddRangeWithResultAsync(details, cancellationToken);

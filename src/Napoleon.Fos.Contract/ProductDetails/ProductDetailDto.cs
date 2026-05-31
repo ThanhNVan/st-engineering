@@ -7,5 +7,5 @@ public record ProductDetailDto(Guid? Id,
     string Description, 
     string ImageUrl, 
     int Price,
-    Guid ProductId,
+    Guid? ProductId,
     int Quantity) : BaseDto(Id);

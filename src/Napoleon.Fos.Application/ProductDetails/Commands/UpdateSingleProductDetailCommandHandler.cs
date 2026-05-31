@@ -14,7 +14,7 @@ public class UpdateSingleProductDetailHandler(IAppUnitOfWork appUnitOfWork) : IC
         ArgumentNullException.ThrowIfNull(command.ProductDetailDto.Id);
         ArgumentNullException.ThrowIfNull(command.ProductDetailDto.ProductId);
         
-        var dbProduct = await appUnitOfWork.ProductRepository.GetSingleByIdAsync(command.ProductDetailDto.ProductId, cancellationToken);
+        var dbProduct = await appUnitOfWork.ProductRepository.GetSingleByIdAsync(command.ProductDetailDto.ProductId.Value, cancellationToken);
         ArgumentNullException.ThrowIfNull(dbProduct);
         
         await appUnitOfWork.ProductDetailtRepository.UpdateAndSaveAsync(command.ProductDetailDto.ToEntity(), cancellationToken);

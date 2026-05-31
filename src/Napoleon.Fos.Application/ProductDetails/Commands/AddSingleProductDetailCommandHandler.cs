@@ -12,7 +12,7 @@ public class AddSingleProductDetailHandler(IAppUnitOfWork appUnitOfWork) : IComm
     public async Task<ProductDetailDto> Handle(AddSingleProductDetailCommand command, CancellationToken cancellationToken)
     {
         var entity = command.ProductDetailDto.ToEntity();
-        var dbProduct = await appUnitOfWork.ProductRepository.GetSingleByIdAsync(command.ProductDetailDto.ProductId);
+        var dbProduct = await appUnitOfWork.ProductRepository.GetSingleByIdAsync(command.ProductDetailDto.ProductId.Value);
         ArgumentNullException.ThrowIfNull(dbProduct);
 
         var dbEntity = await appUnitOfWork.ProductDetailtRepository.AddAndSaveAsync(entity, cancellationToken);
