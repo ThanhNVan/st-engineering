@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Napoleon.Shared.Domain.Entity;
 
 namespace Napoleon.Shared.Core.Repositories;
@@ -63,7 +64,7 @@ public interface IBaseRepository<TEntity>
     #endregion
 
     #region [ Others ]
-    IQueryable<TEntity> GetQueryable(bool asTracking = false);
+    IQueryable<TEntity> GetQueryable(QueryTrackingBehavior asTracking = QueryTrackingBehavior.NoTracking);
 
     ValueTask<bool> IsAnyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
     #endregion

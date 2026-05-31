@@ -1,5 +1,6 @@
 ﻿using ApplicationUnitTest.Helper;
 using Bogus;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Napoleon.Fos.Application.Customers.Auth.Commands;
 using Napoleon.Fos.Application.Products.Commands;
@@ -126,7 +127,7 @@ public class ProductUnitTest
         var queryable = dbEntity.AsAsyncQueryable();
         var expected = dbEntity.Select(x => x.ToDto()).ToList();
 
-        _appUnitOfWork.Setup(x => x.ProductRepository.GetQueryable(It.IsAny<bool>())).Returns(queryable);
+        _appUnitOfWork.Setup(x => x.ProductRepository.GetQueryable(It.IsAny<QueryTrackingBehavior>())).Returns(queryable);
         _appUnitOfWork.Setup(x => x.ProductRepository.GetManyTypeAsync(It.IsAny<IQueryable<ProductDto>>(), It.IsAny<CancellationToken>())).ReturnsAsync(expected);
 
         // Act

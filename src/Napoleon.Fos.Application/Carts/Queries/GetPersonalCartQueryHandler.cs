@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Napoleon.Fos.Application.Carts.Extensions;
 using Napoleon.Fos.Contract.Carts;
 using Napoleon.Fos.Core.UnitOfWork;
 using Napoleon.Shared.Core.Requests.Queries;
@@ -15,16 +16,7 @@ public class GetPersonalCartQueryHandler(IAppUnitOfWork appUnitOfWork) : IQueryH
                                 .Where(x => x.CustomerId.Equals(request.CustomerId))
                                     .Include(x => x.ProductDetail)
                                         .ThenInclude(x => x.Product)
-                                    .Select(x => new CartDto(x.Id, 
-                                                        x.ProductDetail.Varience,
-                                                        x.ProductDetail.Description,
-                                                        x.ProductDetail.ImageUrl,
-                                                        x.ProductDetail.Price,
-                                                        x.ProductDetail.Quantity,
-                                                        x.ProductDetail.Product.Id,
-                                                        x.ProductDetail.Product.Name,
-                                                        x.ProductDetail.Product.Description,
-                                                        x.ProductDetail.Product.ImageUrl));
+                                    .Select(x => x.GetCartDto());
 
         var result = await appUnitOfWork.CartRepository.GetManyTypeAsync(query, cancellationToken);
 

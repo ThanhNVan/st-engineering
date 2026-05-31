@@ -23,5 +23,8 @@ public class Customer : BaseEntity, IDeletingAuditTrail, IModifyingAuditTrail, I
     
     [InverseProperty("Customer")]
     public virtual ICollection<Cart>? Carts { get; set; }
+    
+    [InverseProperty("Customer")]
+    public virtual ICollection<Order>? Orders { get; set; }
     #endregion
 }

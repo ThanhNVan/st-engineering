@@ -1,6 +1,7 @@
 ﻿using ApplicationUnitTest.Helper;
 using AutoFixture;
 using Bogus;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Napoleon.Fos.Application.Customers.Auth.Commands;
 using Napoleon.Fos.Application.Customers.Normal.Extensions;
@@ -38,7 +39,7 @@ public class AuthUnitTest
 
         _appUnitOfWork.Setup(x => x.AuthenticationTokenRepository.AddAndSaveAsync(It.IsAny<AuthenticationToken>(), It.IsAny<CancellationToken>())).ReturnsAsync(authenticationToken);
         _appUnitOfWork.Setup(x => x.CustomerRepository.GetSingleTypeAsync(It.IsAny<IQueryable<CustomerDto>>(), It.IsAny<CancellationToken>())).ReturnsAsync(expected.ToDto());
-        _appUnitOfWork.Setup(x => x.CustomerRepository.GetQueryable(It.IsAny<bool>())).Returns(queryable);
+        _appUnitOfWork.Setup(x => x.CustomerRepository.GetQueryable(It.IsAny<QueryTrackingBehavior>())).Returns(queryable);
 
         // Act
         var handler = new LoginCommandHandler(_appUnitOfWork.Object, jwtSettings);

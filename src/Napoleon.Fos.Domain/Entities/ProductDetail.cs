@@ -30,5 +30,8 @@ public class ProductDetail : BaseEntity, IDeletingAuditTrail, IModifyingAuditTra
 
     [InverseProperty("ProductDetail")]
     public virtual ICollection<Cart>? Carts { get; set; }
+    
+    [InverseProperty("ProductDetail")]
+    public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
 }
 

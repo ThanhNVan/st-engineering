@@ -2,7 +2,7 @@
 
 namespace Napoleon.Fos.Contract.Carts;
 
-public record AddCartDto(Guid? Id, Guid? CustomerId, Guid ProductDetailId, int? Quantity) : BaseDto(Id);
+public record AddCartDto(Guid CustomerId, Guid ProductDetailId, int? Quantity);
 public record CartDto(Guid? Id,
     string Variance,
     string Description,

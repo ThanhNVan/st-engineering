@@ -1,5 +1,6 @@
 ﻿using ApplicationUnitTest.Helper;
 using Bogus;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Napoleon.Fos.Application.Customers.Normal.Extensions;
 using Napoleon.Fos.Application.Customers.Normal.Queries;
@@ -21,7 +22,7 @@ public class CustomerUnitTests
         var customers = GetSeedCustomerData(1);
         var customerQueryable = customers.AsAsyncQueryable();
         var expected = customers.FirstOrDefault()!;
-        _appUnitOfWork.Setup(x => x.CustomerRepository.GetQueryable(It.IsAny<bool>())).Returns(customerQueryable);
+        _appUnitOfWork.Setup(x => x.CustomerRepository.GetQueryable(It.IsAny<QueryTrackingBehavior>())).Returns(customerQueryable);
         _appUnitOfWork.Setup(x => x.CustomerRepository.GetSingleTypeAsync(It.IsAny<IQueryable<CustomerDto>>(), It.IsAny<CancellationToken>())).ReturnsAsync(expected.ToDto());
 
         // Act

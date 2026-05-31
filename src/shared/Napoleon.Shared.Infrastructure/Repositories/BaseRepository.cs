@@ -224,11 +224,11 @@ where TEntity : BaseEntity
     #endregion
 
     #region [ Others ]
-    public IQueryable<TEntity> GetQueryable(bool asTracking = false)
+    public IQueryable<TEntity> GetQueryable(QueryTrackingBehavior asTracking = QueryTrackingBehavior.NoTracking)
     {
         var result = dbContext.Set<TEntity>().AsQueryable();
 
-        return asTracking ? result.AsTracking() : result;
+        return asTracking == QueryTrackingBehavior.TrackAll ? result.AsTracking() : result;
     }
 
     public async ValueTask<bool> IsAnyAsync(Expression<Func<TEntity, bool>> expression,
