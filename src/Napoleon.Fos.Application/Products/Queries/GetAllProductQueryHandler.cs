@@ -16,6 +16,9 @@ public class GetAllProductQueryHandler(IAppUnitOfWork appUnitOfWork, IMemoryCach
     {
         return await cache.GetOrCreateAsync("products", async entry =>
         {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+            entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+            entry.Priority = CacheItemPriority.Normal;
             var query = queryRequest.Name.IsNullOrEmpty()
                        ? appUnitOfWork.ProductRepository.GetQueryable().Include(x => x.ProductDetails.Where(x => x.Quantity > 0))
                        // note: must use ToLower, don't use stringComparison
