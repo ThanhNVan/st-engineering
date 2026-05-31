@@ -29,6 +29,8 @@ public class ProductMessageConsumer(IAppUnitOfWork appUnitOfWork, IMemoryCache c
         {
             var productDto = new ProductDto(dbEntity.Id, dbEntity.Name, dbEntity.Description, dbEntity.ImageUrl, dbDetails.ToListDto());
             cachedProducts.Add(productDto);
+
+            cachedProducts = cachedProducts.DistinctBy(x=> x.Id).ToList();
         }
 
 
