@@ -208,7 +208,7 @@ where TEntity : BaseEntity
     public async Task SoftDeleteRangeByIdsAsync(IList<Guid> ids, CancellationToken cancellationToken = default)
     {
         var deletingEntities = await GetManyByIdsAsync(ids, cancellationToken);
-        if (deletingEntities.IsNotNullOrEmpty() || deletingEntities.Count != ids.Count)
+        if (deletingEntities.IsNullOrEmpty() || deletingEntities.Count != ids.Count)
             throw new BadRequestException("Id List is not valid");
 
         SoftDeleteRange(deletingEntities);

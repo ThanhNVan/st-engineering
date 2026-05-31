@@ -43,8 +43,8 @@ public class ProductController(ISender sender) : ControllerBase
         return Ok(result);
     }
     
-    [HttpDelete("")]
-    public async ValueTask<IActionResult> DeleteSingleAsync([FromQuery] Guid productId, CancellationToken cancellationToken = default)
+    [HttpDelete("{productId:guid}")]
+    public async ValueTask<IActionResult> DeleteSingleAsync([FromRoute] Guid productId, CancellationToken cancellationToken = default)
     {
         var data = await sender.Send(new DeleteSingleProductCommand(productId), cancellationToken);
 
