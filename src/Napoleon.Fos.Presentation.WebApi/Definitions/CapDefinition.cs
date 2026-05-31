@@ -27,6 +27,8 @@ public static class CapDefinition
                 opt.AllowAnonymousExplicit = true;
             });
 
+            cap.DefaultGroupName = "default";
+
             // Retry config
             cap.FailedRetryCount = 5;
             cap.FailedRetryInterval = 10; // seconds

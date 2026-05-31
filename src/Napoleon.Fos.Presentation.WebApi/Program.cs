@@ -53,7 +53,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseExceptionHandler();
-app.UseMiddleware<CustomAuthenticationMiddleware>();
+//app.UseMiddleware<CustomAuthenticationMiddleware>();
 
 await app.RunAsync();
 
